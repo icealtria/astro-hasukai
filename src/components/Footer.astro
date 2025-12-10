@@ -9,15 +9,6 @@ const { slug } = Astro.props;
   id="footer"
   class="flex py-8 relative z-10 flex-col items-center bg-inverse-surface text-on-inverse-surface"
 >
-  {
-    !import.meta.env.DEV && slug && (
-      <img
-        class="h-20"
-        src={`https://count.kururin.cc/get/${slug}`}
-        alt="meow counter"
-      />
-    )
-  }
   <div class="gap-2 flex justify-center items-center">
     Copyright &copy; 2021 - {today.getFullYear()}
     <span>{SITE.author}</span>
