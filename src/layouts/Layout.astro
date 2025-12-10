@@ -1,0 +1,35 @@
+---
+import BaseHead from "@/components/BaseHead.astro";
+import Footer from "@/components/Footer.astro";
+import Header from "@/components/Header/Header.astro";
+interface Props {
+    title: string;
+    description?: string;
+    ogimage?: string;
+    slug?: string;
+}
+const { title, description, ogimage, slug } = Astro.props;
+import "@unocss/reset/tailwind-compat.css";
+---
+
+<!doctype html>
+<html lang="zh-cn">
+    <head>
+        <slot name="head" />
+        <BaseHead title={title} description={description} image={ogimage} />
+    </head>
+    <body
+        class="bg-surface-bright max-w-7xl mx-auto border-outline xl:border-x"
+    >
+        <div class="flex bg-surface-container">
+            <div class="min-w-0 grow basis-3/4">
+                <Header />
+                <div class="mx-auto">
+                    <slot />
+                </div>
+            </div>
+            <slot name="side" />
+        </div>
+        <Footer slug={slug} />
+    </body>
+</html>

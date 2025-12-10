@@ -1,0 +1,18 @@
+---
+const { slug, author, title, pubDate, license } = Astro.props;
+import FormattedDate from "@components/FormattedDate.astro";
+import { SITE } from "@/consts";
+const article_url = new URL(SITE.url + "/blog/" + slug);
+---
+
+<div
+    class="flex border-b border-outline bg-surface-container"
+    id="article-info"
+>
+    <h1 class="mb-0 text-xl basis-3/4 border-r border-outline p-2 md:p-10">
+        {title}
+    </h1>
+    <div class="md:text-xl basis-1/4 p-2 md:p-10 font-mono">
+        <FormattedDate lang="sv-SE" date={pubDate} />
+    </div>
+</div>

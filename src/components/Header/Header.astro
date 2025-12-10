@@ -1,0 +1,110 @@
+---
+import Nav from "../Side/Nav.astro";
+import { SITE, mottos } from "../../consts";
+---
+
+<header
+    class="p-4 md:p-10 z-10 flex items-center justify-between sticky top-0 md:relative bg-[color-mix(in_srgb,var(--surface-container),transparent_20%)] backdrop-blur-md select-none"
+    id="main-header"
+>
+    <a class="text-inverse-surface" href="/">
+        <h1 class="text-2xl md:text-4xl">{SITE.title}</h1>
+        <span class="text-sm md:text-lg" style="font-family: var(--font-lora)"
+            >{SITE.slogan}</span
+        >
+    </a>
+    <p class="hidden text-sm md:block max-w-xs">
+        {mottos[Math.floor(Math.random() * mottos.length)]}
+    </p>
+    <button
+        popovertarget="nav"
+        class="md:hidden bg-transparent flex flex-col justify-center items-center w-12 h-12"
+    >
+        <div class="menu-icon">
+            <span class="line h-[0.6px]"></span>
+            <span class="line h-[1px]"></span>
+            <span class="line h-[1.5px]"></span>
+        </div>
+    </button>
+</header>
+
+<div id="nav" class="bg-white h-full w-full border-y border-outline" popover>
+    <Nav />
+</div>
+
+<style>
+    .menu-icon {
+        width: 3rem;
+        height: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .line {
+        width: 100%;
+        background-color: var(--on-surface);
+        transition:
+            transform 0.3s ease,
+            opacity 0.3s ease;
+        transform-origin: center;
+    }
+
+    :global(body:has(#nav:popover-open)) .line:nth-child(1) {
+        transform: translateY(11.25px) rotate(45deg);
+    }
+
+    :global(body:has(#nav:popover-open)) .line:nth-child(2) {
+        opacity: 0;
+        transform: scaleX(0);
+    }
+
+    :global(body:has(#nav:popover-open)) .line:nth-child(3) {
+        transform: translateY(-11.25px) rotate(-45deg);
+    }
+
+    :global(body:has(#nav:popover-open)) .line {
+        height: 1px;
+    }
+
+    #nav {
+        opacity: 1;
+        transform: translateY(0);
+        transition:
+            opacity 0.3s ease,
+            transform 0.3s ease;
+    }
+
+    @starting-style {
+        #nav:popover-open {
+            opacity: 0;
+        }
+    }
+
+    @supports (anchor-name: --header) {
+        #main-header {
+            anchor-name: --header;
+        }
+
+        #nav {
+            position: absolute;
+            position-anchor: --header;
+            top: anchor(bottom);
+            left: 0;
+            right: 0;
+            margin: 0;
+            margin-top: 0rem;
+        }
+    }
+
+    @supports not (anchor-name: --header) {
+        #nav {
+            position: fixed;
+            left: 0;
+            right: 0;
+            margin: 0;
+            z-index: 50;
+            top: 5rem;
+        }
+    }
+</style>

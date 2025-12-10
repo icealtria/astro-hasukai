@@ -1,0 +1,29 @@
+<div class="page-container">
+    <div class="border-outline border">
+        <slot />
+    </div>
+</div>
+
+<style>
+    .page-container::before {
+        content: "";
+        display: block;
+        width: 100%;
+        height: calc(var(--spacing) * 5);
+        border-left: #383834 solid 1px;
+        border-right: #383834 solid 1px;
+        box-sizing: border-box;
+    }
+
+    @media (min-width: 48rem) {
+        .page-container::before {
+            height: calc(var(--spacing) * 10);
+        }
+    }
+
+    .page-container {
+        @apply px-5 md:px-10 border-outline;
+        background-color: var(--primary-container);
+        min-height: calc(100vh - 250px);
+    }
+</style>

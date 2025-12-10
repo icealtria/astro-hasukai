@@ -1,0 +1,18 @@
+---
+import NavLink from "./NavLink.astro";
+---
+
+<div class="flex flex-col border-gray-200">
+    <NavLink href="/page/1/" text="Posts" sub="札記" />
+    <NavLink href="/friends/" text="Friends" sub="リンク" />
+    <!-- <NavLink href="/contact/" text="Contact" sub="お問い合わせ" /> -->
+    <!-- <NavLink href="/terms" text="Terms" sub="利用規約" /> -->
+    <NavLink href="/blog" text="Archives" sub="年別アーカイブ" />
+    <NavLink href="/about/" text="About" sub="プロフィール" />
+    <NavLink
+        href="/atom.xml"
+        text="Subscribe"
+        sub="RSS購読"
+        icon="ri:rss-line"
+    />
+</div>

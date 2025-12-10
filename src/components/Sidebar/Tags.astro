@@ -1,0 +1,17 @@
+---
+import { getTagsInfo } from "@/utils/tags";
+const tags = Array.from(getTagsInfo()).sort((a, b) => b[1] - a[1]);
+---
+
+<div class="flex flex-wrap">
+    {
+        tags.map(([tag, count]) => (
+            <>
+                <a class="py-1 px-2 tag" href={`/tags/${tag}`}>
+                    {tag}
+                </a>
+                <span class="hidden">{count}</span>
+            </>
+        ))
+    }
+</div>

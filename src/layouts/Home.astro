@@ -1,0 +1,11 @@
+---
+import Side from "@/components/Side/Side.astro";
+import BaseLayout from "./Layout.astro";
+const { title, description } = Astro.props;
+---
+
+<BaseLayout title={title} description={description} slug="index">
+    <slot name="head" slot="name" />
+    <slot />
+    <Side slot="side" />
+</BaseLayout>

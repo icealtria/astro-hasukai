@@ -1,0 +1,19 @@
+---
+const { frontmatter } = Astro.props;
+const { title, description, pubDate, updatedDate, heroImage, tags, slug } =
+  frontmatter;
+
+import Headline from "@/components/Headline.astro";
+import Layout from "./Home.astro";
+import PageContainer from "@/components/PageContainer.astro";
+---
+
+<Layout title={title} description={description} slug={slug}>
+  <Headline title={title} />
+  <PageContainer>
+    <slot name="head" slot="name" />
+    <article class="prose px-4 md:px-10 py-2 max-w-none bg-surface-bright">
+      <slot />
+    </article>
+  </PageContainer>
+</Layout>

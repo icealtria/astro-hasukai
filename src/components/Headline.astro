@@ -1,0 +1,17 @@
+---
+const { title } = Astro.props;
+---
+
+<div>
+    <h1
+        class="text-4xl md:text-6xl p-4 md:p-10 uppercase border-y border-outline"
+    >
+        {title}
+    </h1>
+</div>
+
+<style>
+    h1 {
+        font-family: var(--font-lora);
+    }
+</style>

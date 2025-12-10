@@ -1,0 +1,126 @@
+---
+import { Image } from "astro:assets";
+import FormattedDate from "./FormattedDate.astro";
+
+interface Props {
+  title: string;
+  slug: string;
+  pubDate: Date;
+  tags?: string[];
+  heroImage?: any;
+}
+
+const { title, slug, pubDate, tags, heroImage } = Astro.props;
+---
+
+<a
+  href={`/blog/${slug}/`}
+  data-astro-prefetch
+  class="post-link bg-surface-bright hover:bg-surface-bright-hover flex flex-justify-between transition-colors duration-200 lg:items-center"
+>
+  <div class="px-4 py-3">
+    <div class="post-header">
+      <h2 class="post-title">{title}</h2>
+    </div>
+
+    <div class="post-meta">
+      <div class="post-date">
+        <FormattedDate
+          date={pubDate}
+          lang={"sv-SE"}
+          year="numeric"
+          month="2-digit"
+          day="2-digit"
+        />
+      </div>
+
+      {
+        tags && tags.length > 0 && (
+          <div class="post-tags">
+            {tags.map((tag) => (
+              <span class="tag">{tag}</span>
+            ))}
+          </div>
+        )
+      }
+    </div>
+  </div>
+  {
+    heroImage && (
+      <Image
+        src={heroImage}
+        alt={title}
+        width={320}
+        height={180}
+        class:list={"hero-image object-cover hidden lg:block"}
+      />
+    )
+  }
+</a>
+
+<style>
+  .post-link {
+    @apply border-b border-outline last:border-none;
+  }
+
+  @media (min-width: 48rem) {
+    .hero-image {
+      mask-image: linear-gradient(
+        to right,
+        transparent 0%,
+        rgba(0, 0, 0, 0.3) 30%,
+        rgba(0, 0, 0, 0.6) 90%,
+        black 60%
+      );
+      -webkit-mask-image: linear-gradient(
+        to right,
+        transparent 0%,
+        rgba(0, 0, 0, 0.1) 20%,
+        rgba(0, 0, 0, 0.6) 90%
+      );
+    }
+
+    .post-link:hover .hero-image {
+      mask-image: linear-gradient(
+        to right,
+        transparent 0%,
+        rgba(0, 0, 0, 0.4) 30%,
+        rgba(0, 0, 0, 0.8) 90%,
+        black 60%
+      );
+      -webkit-mask-image: linear-gradient(
+        to right,
+        transparent 0%,
+        rgba(0, 0, 0, 0.4) 20%,
+        rgba(0, 0, 0, 0.8) 90%
+      );
+    }
+  }
+
+  .post-header {
+    margin-bottom: 0.75rem;
+  }
+
+  .post-title {
+    @apply md:text-2xl;
+  }
+
+  .post-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .post-date {
+    @apply text-sm border border-outline px-2 py-1;
+  }
+
+  .post-tags {
+    @apply flex flex-wrap gap-2;
+  }
+
+  .tag {
+    @apply border border-outline px-2 py-1 text-sm;
+  }
+</style>

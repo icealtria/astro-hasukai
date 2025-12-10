@@ -1,0 +1,99 @@
+---
+import { SITE } from "../consts";
+import Home from "@/layouts/Home.astro";
+import { posts } from "@/utils/post";
+import PostList from "@/components/PostList.astro";
+import NewsCard from "@/components/NewsCard.astro";
+import ProfileCard from "@/components/Profile/ProfileCard.astro";
+import Hero from "@/images/124719914_p0.webp";
+import { Image } from "astro:assets";
+import Tags from "@/components/Sidebar/Tags.astro";
+const fposts = posts
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+const has_next = posts.length > 3;
+---
+
+<Home title={SITE.title} description={SITE.description}>
+  <main class="px-4 md:px-10 bg-primary-container">
+    <div class="relative inline-block w-full">
+      <Image
+        class="z-1 relative rounded-4xl w-full"
+        src={Hero}
+        alt=""
+        format="avif"
+        width={900}
+        quality="mid"
+        loading="eager"
+        fetchpriority="high"
+      />
+      <a
+        href="https://www.pixiv.net/artworks/124719914"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="glass-badge absolute bottom-2 right-2 md:bottom-4 md:right-4 z-20"
+      >
+        <span class="text-xs md:text-sm font-medium">画师：アシマ / Ashima</span
+        >
+      </a>
+    </div>
+    <div class="py-6 md:py-12">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <NewsCard title="Tags">
+          <Tags />
+        </NewsCard>
+        <NewsCard title="Latest Posts" more={{ url: "/page/1", text: "More" }}>
+          <PostList posts={fposts} />
+        </NewsCard>
+      </div>
+      <div class="py-6 md:py-12">
+        <ProfileCard />
+      </div>
+    </div>
+  </main>
+</Home>
+
+<style>
+  .glass-badge {
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 9999px;
+    padding: 0.2rem 0.4rem;
+    color: hsla(0, 0%, 100%, 0.95);
+    transition: all 0.3s ease;
+    display: inline-block;
+    text-decoration: none;
+    @apply shadow-md;
+  }
+
+  .glass-badge:hover {
+    backdrop-filter: blur(15px);
+    background: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-2px);
+  }
+
+  main::after {
+    content: "";
+    display: block;
+    width: 100%;
+    max-width: calc(var(--container-7xl) - 2px);
+    height: 900px;
+    top: 0;
+    background-color: var(--surface-container);
+    position: absolute;
+    left: calc((50% - var(--container-7xl) / 2) + 1px);
+    /* left: 0; */
+    z-index: 0;
+    border-bottom: #383834 solid 1px;
+  }
+
+  @media (max-width: 48rem) {
+    main::after {
+      max-width: 100%;
+      left: 0;
+      height: 360px;
+    }
+  }
+</style>

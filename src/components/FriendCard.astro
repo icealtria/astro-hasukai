@@ -1,0 +1,48 @@
+---
+interface Props {
+    name: string;
+    url: string;
+    avatar: ImageMetadata;
+    bg?: string;
+}
+
+const { name, url, avatar, bg } = Astro.props;
+import { Image } from "astro:assets";
+---
+
+<a
+    class="mx-auto flex bg-white border border-outline avatar-container"
+    href={url}
+    style={bg ? `--hover-bg: ${bg}` : ""}
+>
+    <Image
+        class="w-24 h-24 md:w-40 md:h-40"
+        width="192"
+        height="192"
+        src={avatar}
+        alt={`${name}'s avatar`}
+        loading="eager"
+    />
+    <div class="name px-2 border-l border-outline">{name}</div>
+</a>
+
+<style>
+    .name {
+        writing-mode: vertical-rl;
+        text-orientation: mixed;
+        font-family: serif;
+        @apply text-xs md:text-base;
+    }
+
+    .avatar-container:hover img {
+        background-color: var(--hover-bg);
+    }
+    .avatar-container img {
+        transition: transform 0.6s cubic-bezier(0.275, 0.82, 0.265, 1);
+        transform-style: preserve-3d;
+    }
+
+    .avatar-container:hover img {
+        transform: rotateY(180deg);
+    }
+</style>

@@ -1,0 +1,54 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+    title: string;
+    more?: {
+        url: string;
+        text: string;
+    };
+    class?: string;
+}
+
+const { title, more, class: className } = Astro.props;
+---
+
+<div class="card" class:list={className}>
+    <div class="header">
+        <p class="title">
+            {title}
+        </p>
+        {
+            more && (
+                <a href={more.url} class="more">
+                    {more.text}
+                    <Icon name="mdi-light:chevron-right" />
+                </a>
+            )
+        }
+    </div>
+    <div class="h-[5px] border-y border-outline"></div>
+    <div>
+        <slot />
+    </div>
+</div>
+
+<style>
+    .card {
+        @apply box-border bg-surface-bright border border-outline;
+    }
+
+    .header {
+        @apply relative flex justify-between items-center uppercase h-16;
+    }
+
+    .title {
+        font-family: var(--font-lora);
+        @apply flex items-center text-3xl md:text-4xl p-4 whitespace-nowrap antialiased;
+    }
+
+    .more {
+        font-family: var(--font-lora);
+        @apply flex items-center gap-1 text-2xl md:text-2xl button hover:text-white p-4 border-l border-outline;
+    }
+</style>

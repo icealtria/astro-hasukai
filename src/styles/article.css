@@ -1,0 +1,80 @@
+p {
+    text-spacing-trim: trim-start;
+    word-break: auto-phrase;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+.hero-image {
+    @apply w-full;
+}
+
+.hidden-text {
+    @apply line-through bg-gray text-gray hover:bg-background transition-colors;
+}
+
+/* pre {
+    overflow-x: auto;
+    white-space: pre;
+}
+
+pre>code {
+    text-wrap-mode: nowrap;
+} */
+
+code {
+    counter-reset: step;
+    counter-increment: step 0;
+}
+
+code .line::before {
+    content: counter(step);
+    counter-increment: step;
+    width: .8rem;
+    margin-right: 1rem;
+    display: inline-block;
+    text-align: right;
+    color: rgba(148, 138, 115, 0.4)
+}
+
+h2::before,
+h3::before {
+    content: "";
+    display: block;
+    background-color: #383834;
+    position: absolute;
+    left: -40px;
+    top: 17px;
+}
+
+h2::before {
+    height: 1px;
+    width: 30px;
+
+}
+
+h3::before {
+    height: 2px;
+    width: 32px;
+}
+
+@media (max-width: 48rem) {
+
+    h2::before,
+    h3::before {
+        left: -8px;
+        width: 6px;
+    }
+}
+
+h2,
+h3 {
+    position: relative;
+}
+
+figcaption {
+    @apply text-center;
+}

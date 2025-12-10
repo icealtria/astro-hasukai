@@ -1,0 +1,43 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+    href: string;
+    text: string;
+    sub: string;
+    icon?: string;
+}
+const { pathname } = Astro.url;
+
+const { href, text, sub, icon } = Astro.props;
+
+const isActive = href === pathname || href === pathname.replace(/\/$/, "");
+---
+
+<a
+    class={`group flex items-center justify-between border-b border-gray-200
+    py-3 px-4 transition-colors hover:bg-inverse-surface ${isActive ? "bg-inverse-surface" : ""}`}
+    href={href}
+    data-astro-prefetch
+>
+    <div class="flex flex-col">
+        <span
+            class={`text-3xl nav-item uppercase group-hover:invert ${isActive ? "invert" : ""}`}
+            >{text}</span
+        >
+        <span class={`text-xs group-hover:invert ${isActive ? "invert" : ""}`}
+            >{sub}</span
+        >
+    </div>
+    <Icon
+        name={icon ? icon : "mdi-light:chevron-right"}
+        class="transition-transform group-hover:translate-x-1 group-hover:invert"
+        size={"1.5rem"}
+    />
+</a>
+
+<style>
+    .nav-item {
+        font-family: var(--font-lora);
+    }
+</style>

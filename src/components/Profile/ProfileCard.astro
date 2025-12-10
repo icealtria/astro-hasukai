@@ -1,0 +1,127 @@
+---
+import NewsCard from "../NewsCard.astro";
+import { Image } from "astro:assets";
+import Avatar from "@/images/avatar.png";
+import { Icon } from "astro-icon/components";
+---
+
+<NewsCard title="Profile">
+    <div class="flex flex-col md:flex-row gap-6 p-6">
+        <div class="shrink-0 flex justify-center md:justify-start">
+            <div
+                class="bg-white md:h-38 border border-outline p-1 w-fit transform md:rotate-[-2deg] shadow-md"
+            >
+                <Image
+                    class="w-24 h-24 md:w-32 md:h-32 hover:bg-[#faefa6] transition-colors"
+                    width="192"
+                    height="192"
+                    src={Avatar}
+                    alt="avatar"
+                />
+            </div>
+        </div>
+        <div class="flex flex-col flex-grow justify-between gap-4">
+            <div class="text-center md:text-left">
+                <p class="text-2xl font-serif">Tachibana Rin</p>
+                <p class="text-sm">Full Stack Developer</p>
+                <div
+                    class="flex items-center gap-1 justify-center md:justify-start"
+                >
+                    <Icon name="ri:map-pin-user-fill" />
+                    <div class="text-sm">
+                        <span>Guangdong, CN</span>
+                        <span>|</span>
+                        <span>UTC+8</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex flex-col gap-4">
+                <div
+                    class="flex flex-wrap justify-center md:justify-start gap-3"
+                >
+                    <a
+                        href="https://github.com/icealtria"
+                        target="_blank"
+                        aria-label="GitHub"
+                        class="social-link"
+                    >
+                        <Icon name="ri:github-fill" class="text-2xl" />
+                    </a>
+                    <a
+                        href="https://twitter.com/icealtria"
+                        target="_blank"
+                        aria-label="Twitter"
+                        class="social-link"
+                    >
+                        <Icon name="ri:twitter-fill" class="text-2xl" />
+                    </a>
+                    <a
+                        href="https://mastodon.social/@icealtria"
+                        target="_blank"
+                        aria-label="Mastodon"
+                        class="social-link"
+                    >
+                        <Icon name="ri:mastodon-fill" class="text-2xl" />
+                    </a>
+                    <a
+                        href="https://bsky.app/profile/kururin.cc"
+                        target="_blank"
+                        aria-label="Bluesky"
+                        class="social-link"
+                    >
+                        <Icon name="ri:bluesky-fill" class="text-2xl" />
+                    </a>
+                    <a
+                        href="https://t.me/icealtria"
+                        target="_blank"
+                        aria-label="Telegram"
+                        class="social-link"
+                    >
+                        <Icon name="ri:telegram-fill" class="text-2xl" />
+                    </a>
+                    <a
+                        href="mailto:i@kururin.cc"
+                        aria-label="Email"
+                        class="social-link"
+                    >
+                        <Icon name="ri:mail-fill" class="text-2xl" />
+                    </a>
+                    <a
+                        href="https://mitsu.kururin.cc"
+                        target="_blank"
+                        aria-label="Keybase"
+                        id="keybase"
+                        class="social-link flex items-center"
+                    >
+                        <Icon name="ri:key-line" class="text-2xl" />
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</NewsCard>
+
+<style>
+    #keybase::after {
+        content: "0x9597 360E 8CC9 805E";
+        max-width: 0;
+        overflow: hidden;
+        white-space: nowrap;
+        opacity: 0;
+        transform: translateX(-0.5rem);
+        transition: all 0.3s ease-out;
+        font-family: monospace;
+        font-size: 0.75rem;
+    }
+    #keybase:hover::after {
+        max-width: 12rem;
+        opacity: 1;
+        margin-left: 0.5rem;
+        transform: translateX(0);
+    }
+
+    .social-link {
+        @apply hover:text-primary transition-colors;
+    }
+</style>

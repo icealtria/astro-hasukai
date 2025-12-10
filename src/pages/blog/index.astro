@@ -1,0 +1,60 @@
+---
+import Layout from "@layouts/Home.astro";
+import FormattedDate from "@/components/FormattedDate.astro";
+import { posts as all_posts } from "@/utils/post";
+import Headline from "@/components/Headline.astro";
+import PageContainer from "@/components/PageContainer.astro";
+const posts = all_posts.sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+let prev_year = 0;
+let years: number[] = [];
+let sorted_posts = posts.map((post) => {
+  const year = new Date(post.data.pubDate).getFullYear();
+  let isAnotherYear = year !== prev_year;
+  if (isAnotherYear) {
+    prev_year = year;
+    years.push(year);
+  }
+  return {
+    ...post,
+    isAnotherYear,
+  };
+});
+---
+
+<Layout title="Archive">
+  <Headline title="ARCHIVES" />
+  <PageContainer>
+    <div class="p-2 pb-16 bg-surface-bright">
+      <div class="max-w-3xl mx-auto">
+        {
+          sorted_posts.map((post) => (
+            <>
+              {post.isAnotherYear && (
+                <div class="py-4 mt-8 border-b-2 border-primary">
+                  <h3 class="text-2xl font-bold font-mono">
+                    {post.data.pubDate.getFullYear()}
+                  </h3>
+                </div>
+              )}
+              <a href={`/blog/${post.slug}/`} class="block group">
+                <div class="flex justify-between items-center py-2 md:py-4 border-b border-outline">
+                  <span class="text-lg">{post.data.title}</span>
+                  <span class="text-sm font-mono">
+                    <FormattedDate
+                      date={post.data.pubDate}
+                      lang="zh-CN"
+                      month="2-digit"
+                      day="2-digit"
+                    />
+                  </span>
+                </div>
+              </a>
+            </>
+          ))
+        }
+      </div>
+    </div>
+  </PageContainer>
+</Layout>

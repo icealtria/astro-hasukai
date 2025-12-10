@@ -1,0 +1,32 @@
+body {
+    font-family:
+        -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
+        'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', 'Helvetica'
+        'PingFang SC', 'Noto Sans CJK SC', sans-serif;
+
+    text-autospace: normal;
+
+    /* 字体渲染优化 - 提升清晰度 */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: "kern" 1;
+    font-kerning: normal;
+}
+
+@view-transition {
+    navigation: auto;
+}
+
+.tag {
+    @apply hover:bg-inverse-surface hover:text-on-inverse-surface transition-colors;
+}
+
+li {
+    list-style-type: square;
+}
+
+::selection {
+    background: var(--primary);
+    color: var(--on-primary);
+}

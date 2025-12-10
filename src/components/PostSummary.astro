@@ -1,0 +1,46 @@
+---
+import FormattedDate from "./FormattedDate.astro";
+const { title, slug, pubDate } = Astro.props;
+---
+
+<a
+  class="flex flex-row bg-surface-bright hover:text-primary transition-colors relative px-4 py-2"
+  href={`/blog/${slug}/`}
+  data-astro-prefetch
+>
+  <div class="flex-grow flex flex-col">
+    <div
+      class="date text-sm text-on-surface-variant w-fit border border-outline px-1"
+    >
+      <FormattedDate
+        date={pubDate}
+        lang={"sv-SE"}
+        year="numeric"
+        month="2-digit"
+        day="2-digit"
+      />
+    </div>
+    <div class="flex items-center text-lg">
+      {title}
+    </div>
+  </div>
+</a>
+
+<style>
+  .date {
+    /* @apply relative; */
+  }
+
+  /* @media (min-width: 48rem) {
+    .date::after {
+      content: "";
+      display: inline-block;
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      height: 1px;
+      width: 100%;
+      background-color: var(--outline);
+    }
+  } */
+</style>

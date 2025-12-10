@@ -1,0 +1,57 @@
+---
+import BaseLayout from "@/layouts/Home.astro";
+import FriendCard from "@components/FriendCard.astro";
+import Akarin from "@/images/Akarin.png";
+import Me from "@/images/avatar.png";
+import Headline from "@/components/Headline.astro";
+import PageContainer from "@/components/PageContainer.astro";
+---
+
+<BaseLayout title="友情链接" slug="friends">
+    <Headline title="FRIENDS" />
+    <PageContainer>
+        <div class="bg-surface-container">
+            <div class="friends">
+                <FriendCard
+                    name="Tachibana Rin"
+                    avatar={Me}
+                    url="https://kururin.cc"
+                    bg="#faefa6"
+                /><FriendCard
+                    name="Akarin"
+                    avatar={Akarin}
+                    url="https://forms.gle/NbggsKMK6a5SKmjR6"
+                /><FriendCard
+                    name="Akarin"
+                    avatar={Akarin}
+                    url="https://forms.gle/NbggsKMK6a5SKmjR6"
+                /><FriendCard
+                    name="Akarin"
+                    avatar={Akarin}
+                    url="https://forms.gle/NbggsKMK6a5SKmjR6"
+                />
+            </div>
+        </div>
+    </PageContainer>
+</BaseLayout>
+
+<style>
+    .friends {
+        display: grid;
+        grid-template-columns: repeat(
+            auto-fit,
+            minmax(calc(var(--spacing) * 28), 1fr)
+        );
+        gap: 1.2rem;
+        padding: 2rem;
+    }
+
+    @media (min-width: 48rem) {
+        .friends {
+            grid-template-columns: repeat(
+                auto-fit,
+                minmax(calc(var(--spacing) * 48), 1fr)
+            );
+        }
+    }
+</style>
